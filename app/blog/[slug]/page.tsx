@@ -4,16 +4,14 @@ import * as matter from "gray-matter"
 import { notFound } from "next/navigation"
 import { join } from "path"
 import markdownit from "markdown-it"
-import { parse } from "yaml"
 import { BLOG_PATH } from "@/app/constant"
 
 const getBlogBySlug = (slug:string)=>{
-  const fileName:string = readdirSync(BLOG_PATH).map((path)=>path.replace(/\.md?$/, '')).filter((name:string)=>name===slug)[0]
+  const fileName:string = readdirSync(BLOG_PATH).map((path)=>path.replace(/\.mdx?$/, '')).filter((name:string)=>name===slug)[0]
   if(!fileName)
     return null 
-  const file = readFileSync(join(BLOG_PATH, `${fileName}.md`))
 
-  const fileData = matter.read(join(BLOG_PATH, `${fileName}.md`))
+  const fileData = matter.read(join(BLOG_PATH, `${fileName}.mdx`))
   const md = markdownit({html:true,linkify:true})
   
   return {data:fileData.data, content:md.render(fileData.content)}

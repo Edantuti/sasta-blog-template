@@ -7,10 +7,10 @@ import { BLOG_PATH } from "@/app/constant";
 
 function getAllBlogs() {
   const article = [];
-  const fileName: string[] = readdirSync(BLOG_PATH).filter((path) => path.includes('.md'));
+  const fileName: string[] = readdirSync(BLOG_PATH).filter((path) => path.includes('.mdx'));
   for (let file in fileName) {
     let fda = matter.read(join(BLOG_PATH, fileName[file]));
-    article.push({ filename: fileName[file].replace(/\.md?$/, ""), ...fda });
+    article.push({ filename: fileName[file].replace(/\.mdx?$/, ""), ...fda });
   }
   article.sort((a, b) => {
     if (a.data.time > b.data.time) return -1;
