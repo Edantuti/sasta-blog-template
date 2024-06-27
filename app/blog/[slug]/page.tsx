@@ -19,7 +19,7 @@ const getBlogBySlug = (slug:string)=>{
 
 
 export default async function Blog({params}:{params:{slug:string}}){
-    const article = getBlogBySlug(params.slug) 
+    const article = getBlogBySlug(decodeURI(params.slug)) 
     if(!article){
       notFound()
     }
